@@ -1,0 +1,105 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+:root {
+  --canvas: 243 244 246;
+  --surface: 255 255 255;
+  --subtle: 247 248 250;
+  --line: 226 229 234;
+  --line-strong: 206 211 219;
+  --ink: 13 17 23;
+  --ink-2: 62 70 84;
+  --ink-3: 100 108 122;
+  --brand: 30 64 220;
+  --brand-soft: 232 237 255;
+  --brand-on: 255 255 255;
+  --success: 17 122 70;
+  --success-soft: 226 244 234;
+  --warning: 163 86 0;
+  --warning-soft: 254 242 220;
+  --danger: 196 32 42;
+  --danger-soft: 253 232 233;
+  --danger-on: 255 255 255;
+  --sidebar: 12 15 20;
+  --sidebar-ink: 238 240 244;
+  --sidebar-muted: 150 158 172;
+  --sidebar-line: 34 39 48;
+  color-scheme: light;
+}
+.dark {
+  --canvas: 10 12 16;
+  --surface: 19 22 28;
+  --subtle: 26 30 37;
+  --line: 38 43 52;
+  --line-strong: 56 62 74;
+  --ink: 238 240 244;
+  --ink-2: 186 192 203;
+  --ink-3: 142 150 163;
+  --brand: 124 152 255;
+  --brand-soft: 29 38 74;
+  --brand-on: 8 12 30;
+  --success: 88 206 140;
+  --success-soft: 18 48 33;
+  --warning: 240 178 72;
+  --warning-soft: 58 40 12;
+  --danger: 248 113 113;
+  --danger-soft: 66 24 26;
+  --danger-on: 30 8 8;
+  --sidebar: 15 18 23;
+  --sidebar-ink: 238 240 244;
+  --sidebar-muted: 146 154 168;
+  --sidebar-line: 34 39 48;
+  color-scheme: dark;
+}
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--brand));
+    outline-offset: 2px;
+  }
+  .dark input[type='date']::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+  input[type='date']::-webkit-calendar-picker-indicator {
+    opacity: 0.6;
+    cursor: pointer;
+  }
+}
+@layer utilities {
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
