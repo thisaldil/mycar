@@ -1,0 +1,17 @@
+import mongoose from 'mongoose';
+
+const vehicleSchema = new mongoose.Schema({
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+  type: { type: String, enum: ['new', 'used'], default: 'used' },
+  status: { type: String, enum: ['active', 'archived'], default: 'active', index: true },
+  make: { type: String, required: true, trim: true },
+  model: { type: String, required: true, trim: true },
+  year: { type: Number, required: true, min: 1950, max: 2200 },
+  mileage: { type: Number, required: true, min: 0 },
+  registration: { type: String, trim: true, index: true },
+  vin: { type: String, trim: true, index: true },
+  images: { type: [String], default: [] }
+}, { timestamps: true, strict: false });
+
+vehicleSchema.set('toJSON', { transform: (_, ret) => { ret.id = ret._id.toString(); delete ret._id; delete ret.__v; delete ret.owner; return ret; } });
+export default mongoose.model('Vehicle', vehicleSchema);
