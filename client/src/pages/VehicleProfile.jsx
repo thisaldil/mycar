@@ -166,8 +166,8 @@ export function VehicleProfile() {
     <div>
       <PageHeader back={{ to: '/vehicles', label: 'My vehicles' }} title={`${vehicle.make} ${vehicle.model}`} description={`${vehicle.year}${vehicle.variant ? ` · ${vehicle.variant}` : ''}`} />
       <Card padded={false} className="overflow-hidden">
-        <div className="flex flex-col md:flex-row">
-          <div className="relative aspect-[16/9] bg-subtle md:aspect-auto md:w-[40%]">
+        <div className="flex flex-col lg:flex-row">
+          <div className="relative aspect-[16/9] bg-subtle lg:aspect-auto lg:w-[40%]">
             {src ? <img src={src} alt={`${vehicle.make} ${vehicle.model}`} className="absolute inset-0 h-full w-full object-cover" /> : <CarFrontIcon className="absolute inset-0 m-auto h-14 w-14 text-ink-muted/50" aria-hidden="true" />}
           </div>
           <div className="flex-1 p-5 sm:p-6">

@@ -62,7 +62,7 @@ export function ExpensesPanel({ vehicle }) {
       toolbar={
       <Select
         aria-label="Filter by category"
-        className="w-44"
+        className="w-full sm:w-44"
         selectClassName="h-9 text-sm"
         options={EXPENSE_CATEGORIES}
         placeholder="All categories"

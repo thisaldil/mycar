@@ -18,12 +18,12 @@ export function SegmentedControl({ options, value, onChange, ariaLabel, size = '
   };
 
   return (
-    <div
-      role="radiogroup"
-      aria-label={ariaLabel}
-      className={cn('inline-flex rounded-xl bg-subtle p-1 ring-1 ring-inset ring-line', fullWidth && 'flex w-full', className)}>
-      
-      {items.map((item, index) => {
+    <div className="no-scrollbar max-w-full overflow-x-auto">
+      <div
+        role="radiogroup"
+        aria-label={ariaLabel}
+        className={cn('inline-flex min-w-max rounded-xl bg-subtle p-1 ring-1 ring-inset ring-line', fullWidth && 'flex w-full', className)}>
+        {items.map((item, index) => {
         const active = item.value === value;
         const Icon = item.icon;
         return (
@@ -58,7 +58,8 @@ export function SegmentedControl({ options, value, onChange, ariaLabel, size = '
             </span>
           </button>);
 
-      })}
+        })}
+      </div>
     </div>);
 
 }

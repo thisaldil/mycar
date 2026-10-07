@@ -7,7 +7,7 @@ import { AUTH_IMAGE } from '../data/seed';
 export function AuthLayout() {
   return (
     <div className="grid min-h-screen w-full bg-canvas lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-      <div className="flex min-h-screen flex-col px-5 py-6 sm:px-10">
+      <div className="min-w-0 flex min-h-screen flex-col px-5 py-6 sm:px-10">
         <Link to="/login" className="w-fit rounded-xl">
           <Logo />
         </Link>

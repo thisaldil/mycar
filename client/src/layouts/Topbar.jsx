@@ -22,12 +22,14 @@ export function Topbar() {
 
   return (
     <header className="sticky top-0 z-20 border-b border-line bg-canvas/90 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-[1400px] items-center gap-3 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 min-w-0 max-w-[1400px] items-center gap-2 px-3 sm:gap-3 sm:px-6 lg:px-8">
         <Link to="/dashboard" className="shrink-0 rounded-xl md:hidden" aria-label="CarLife dashboard">
           <Logo showText={false} />
         </Link>
-        <VehicleSwitcher />
-        <div className="ml-auto flex items-center gap-1 sm:gap-2">
+        <div className="min-w-0 flex-1">
+          <VehicleSwitcher />
+        </div>
+        <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
           <Dropdown
             className="hidden sm:block"
             items={[{ type: 'label', label: 'Add to active vehicle' }, ...QUICK_ADD.map((q) => ({ label: q.label, icon: q.icon, to: q.to }))]}

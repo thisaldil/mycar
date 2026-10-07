@@ -62,7 +62,7 @@ export function VehicleSwitcher() {
       <button
         {...props}
         type="button"
-        className="flex h-11 min-w-0 max-w-[15rem] items-center gap-3 rounded-xl py-1 pl-1 pr-2 text-left transition-colors duration-150 hover:bg-subtle sm:max-w-xs"
+        className="flex h-11 w-full min-w-0 max-w-[calc(100vw-8.5rem)] items-center gap-2 rounded-xl py-1 pl-1 pr-2 text-left transition-colors duration-150 hover:bg-subtle sm:max-w-xs sm:gap-3"
         aria-label={`Active vehicle: ${vehicleName(activeVehicle)}. Change vehicle`}>
         
           {src ?

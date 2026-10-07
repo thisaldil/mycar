@@ -40,7 +40,7 @@ export function AppLayout() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-canvas">
+    <div className="min-h-screen w-full overflow-x-clip bg-canvas">
       <a
         href="#main"
         className="sr-only z-50 rounded-lg bg-brand px-4 py-2 text-brand-on focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
@@ -50,7 +50,7 @@ export function AppLayout() {
       <Sidebar collapsed={collapsed} canToggle={isLarge} onToggle={toggle} />
       <div className={cn('transition-[padding] duration-200 ease-out', collapsed ? 'md:pl-20' : 'md:pl-64')}>
         <Topbar />
-        <main id="main" tabIndex={-1} className="mx-auto w-full max-w-[1400px] px-4 pb-28 pt-5 outline-none sm:px-6 md:pb-12 lg:px-8 lg:pt-8">
+        <main id="main" tabIndex={-1} className="mx-auto w-full min-w-0 max-w-[1400px] px-4 pb-28 pt-5 outline-none sm:px-6 md:pb-12 lg:px-8 lg:pt-8">
           <Suspense fallback={<LoadingState variant="page" />}>
             <Outlet />
           </Suspense>

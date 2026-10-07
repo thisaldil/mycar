@@ -84,11 +84,11 @@ export function Dashboard() {
   return (
     <div className="space-y-6">
       <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
+        <div className="min-w-0">
           <p className="text-sm text-ink-muted">
             {greeting()}, {firstName}
           </p>
-          <h1 className="mt-0.5 text-2xl font-bold text-ink sm:text-[28px]">Here's how your {activeVehicle.model} is doing</h1>
+          <h1 className="mt-0.5 break-words text-2xl font-bold text-ink sm:text-[28px]">Here's how your {activeVehicle.model} is doing</h1>
         </div>
         <div className="flex gap-2">
           <Button variant="secondary" leftIcon={GaugeIcon} onClick={() => setMileageOpen(true)} className="flex-1 sm:flex-none">

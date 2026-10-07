@@ -18,8 +18,8 @@ export function StatGroup({ stats, className }) {
               {Icon ? <Icon className="h-4 w-4 shrink-0" aria-hidden="true" /> : null}
               <span className="truncate">{s.label}</span>
             </dt>
-            <dd className={cn('mt-1.5 truncate font-display font-semibold text-ink tnum', s.emphasis ? 'text-2xl sm:text-[28px]' : 'text-xl')}>{s.value}</dd>
-            {s.hint ? <dd className={cn('mt-0.5 truncate text-[13px]', HINT_TONES[s.hintTone || 'neutral'])}>{s.hint}</dd> : null}
+            <dd className={cn('mt-1.5 break-words font-display font-semibold text-ink tnum', s.emphasis ? 'text-2xl sm:text-[28px]' : 'text-xl')}>{s.value}</dd>
+            {s.hint ? <dd className={cn('mt-0.5 break-words text-[13px]', HINT_TONES[s.hintTone || 'neutral'])}>{s.hint}</dd> : null}
           </div>);
 
       })}
