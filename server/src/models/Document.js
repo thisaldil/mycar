@@ -10,9 +10,20 @@ const documentSchema = new mongoose.Schema({
   fileName: String,
   fileType: String,
   fileSize: Number,
-  filePath: String,
+  blobUrl: String,
+  blobPathname: String,
   hasFile: { type: Boolean, default: false }
-}, { timestamps: true, strict: false });
+}, { timestamps: true });
 
-documentSchema.set('toJSON', { transform: (_, ret) => { ret.id = ret._id.toString(); delete ret._id; delete ret.__v; delete ret.owner; delete ret.filePath; return ret; } });
+documentSchema.set('toJSON', {
+  transform: (_, ret) => {
+    ret.id = ret._id.toString();
+    delete ret._id;
+    delete ret.__v;
+    delete ret.owner;
+    delete ret.blobUrl;
+    delete ret.blobPathname;
+    return ret;
+  }
+});
 export default mongoose.model('Document', documentSchema);

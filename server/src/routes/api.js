@@ -1,21 +1,19 @@
 import express from 'express';
 import multer from 'multer';
-import path from 'node:path';
-import fs from 'node:fs';
+import { fileTypeFromBuffer } from 'file-type';
 import { env } from '../config/env.js';
 import { requireAuth } from '../middleware/auth.js';
 import * as auth from '../controllers/auth.js';
 import * as resources from '../controllers/resources.js';
+import { extensionForType, isSupportedDocumentType, maxDocumentSize } from '../services/blobStorage.js';
 
 const router = express.Router();
-const uploadDir = path.resolve(env.uploadDir);
-fs.mkdirSync(uploadDir, { recursive: true });
 const upload = multer({
-  dest: uploadDir,
-  limits: { fileSize: 10 * 1024 * 1024 },
+  storage: multer.memoryStorage(),
+  limits: { fileSize: maxDocumentSize },
   fileFilter: (_, file, cb) => {
-    if (['application/pdf', 'image/jpeg', 'image/png', 'image/webp'].includes(file.mimetype)) return cb(null, true);
-    return cb(Object.assign(new Error('Only PDF and image documents are supported.'), { status: 400 }));
+    if (isSupportedDocumentType(file.mimetype)) return cb(null, true);
+    return cb(Object.assign(new Error('Only PDF and JPEG, PNG, or WebP image documents are supported.'), { status: 400 }));
   }
 });
 
@@ -57,7 +55,21 @@ for (const [route, name] of Object.entries(collections)) {
 
 router.get('/documents', async (req, res) => resources.resourceController('Document').list(req, res));
 router.get('/documents/:id', async (req, res) => resources.resourceController('Document').get(req, res));
-router.post('/documents', upload.single('file'), resources.uploadDocument);
+router.post('/documents', upload.single('file'), async (req, res, next) => {
+  try {
+    if (req.file) {
+      const detected = await fileTypeFromBuffer(req.file.buffer);
+      const extension = extensionForType(req.file.mimetype);
+      if (!detected || detected.mime !== req.file.mimetype || !extension) {
+        return res.status(400).json({ success: false, message: 'The uploaded file content does not match a supported document type.' });
+      }
+      req.uploadedFile = { ...req.file, extension };
+    }
+    return resources.uploadDocument(req, res);
+  } catch (error) {
+    return next(error);
+  }
+});
 router.put('/documents/:id', async (req, res) => resources.resourceController('Document').update(req, res));
 router.delete('/documents/:id', resources.deleteDocument);
 router.get('/documents/:id/file', resources.downloadDocument);
